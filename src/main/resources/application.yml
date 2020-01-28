@@ -1,0 +1,14 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.101.72.84:3306/job_collection?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true
+#    url: jdbc:mysql://127.0.0.1:3306/ichangda?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true
+    username: root
+#    password: dxp971216
+    password: 123456
+server:
+  port: 1437
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.ccsu.jobcollection.mapper

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccsu.jobcollection.mapper.WxInfoMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+<resultMap id="wxInfo" type="com.ccsu.jobcollection.pojo.WxInfo">
+    <result column="nick_name" property="nickName"/>
+    <result column="avatar_url" property="avatarUrl"/>
+    <result column="city" property="city"/>
+    <result column="country" property="country"/>
+    <result column="gender" property="gender"/>
+    <result column="language" property="language"/>
+    <result column="province" property="province"/>
+</resultMap>
+
+    <parameterMap id="wxinfoPar" type="com.ccsu.jobcollection.pojo.WxInfo">
+        <parameter property="nickName"/>
+        <parameter property="avatarUrl"/>
+        <parameter property="city"/>
+        <parameter property="country"/>
+        <parameter property="gender"/>
+        <parameter property="language"/>
+        <parameter property="province"/>
+    </parameterMap>
+
+
+    <insert id="insert" parameterMap="wxinfoPar">
+
+        insert into wxinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nickName != null">nick_name,</if>
+            <if test="avatarUrl != null">avatar_url,</if>
+            <if test="city != null">city,</if>
+            <if test="country != null">country,</if>
+            <if test="gender != null">gender,</if>
+            <if test="language != null">language,</if>
+            <if test="province != null">province,</if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="nickName!= null">#{nickName,jdbcType=VARCHAR},</if>
+            <if test="avatarUrl!= null">#{avatarUrl,jdbcType=VARCHAR},</if>
+            <if test="city!= null">#{city,jdbcType=VARCHAR},</if>
+            <if test="country!= null">#{country,jdbcType=VARCHAR},</if>
+            <if test="gender!= null">#{gender,jdbcType=INTEGER},</if>
+            <if test="language!= null">#{language,jdbcType=VARCHAR},</if>
+            <if test="province!= null">#{province,jdbcType=VARCHAR},</if>
+
+        </trim>
+    </insert>
+
+
+
+</mapper>
