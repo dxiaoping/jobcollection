@@ -6,6 +6,7 @@ package com.ccsu.jobcollection.pojo;
  * @create 2020-01-28 9:32
  */
 public class WxInfo {
+    /**昵称*/private String openid;
     /**昵称*/private String nickName;
     /**头像地址*/private String avatarUrl;
     /**城市*/private String city;
@@ -19,6 +20,7 @@ public class WxInfo {
 
     public WxInfo(String nickName, String avatarUrl, String city, String country, int gender, String language, String province) {
 
+        this.openid = openid;
         this.nickName = nickName;
         this.avatarUrl = avatarUrl;
         this.city = city;
@@ -26,6 +28,14 @@ public class WxInfo {
         this.gender = gender;
         this.language = language;
         this.province = province;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
     public String getAvatarUrl() {

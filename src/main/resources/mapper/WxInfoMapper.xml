@@ -3,17 +3,19 @@
 <mapper namespace="com.ccsu.jobcollection.mapper.WxInfoMapper">
 
     <!-- 可根据自己的需求，是否要使用 -->
-<resultMap id="wxInfo" type="com.ccsu.jobcollection.pojo.WxInfo">
-    <result column="nick_name" property="nickName"/>
-    <result column="avatar_url" property="avatarUrl"/>
-    <result column="city" property="city"/>
-    <result column="country" property="country"/>
-    <result column="gender" property="gender"/>
-    <result column="language" property="language"/>
-    <result column="province" property="province"/>
-</resultMap>
+    <resultMap id="wxInfo" type="com.ccsu.jobcollection.pojo.WxInfo">
+        <result column="openid" property="openid"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="city" property="city"/>
+        <result column="country" property="country"/>
+        <result column="gender" property="gender"/>
+        <result column="language" property="language"/>
+        <result column="province" property="province"/>
+    </resultMap>
 
     <parameterMap id="wxinfoPar" type="com.ccsu.jobcollection.pojo.WxInfo">
+        <parameter property="openid"/>
         <parameter property="nickName"/>
         <parameter property="avatarUrl"/>
         <parameter property="city"/>
@@ -28,6 +30,7 @@
 
         insert into wxinfo
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="openid != null">openid,</if>
             <if test="nickName != null">nick_name,</if>
             <if test="avatarUrl != null">avatar_url,</if>
             <if test="city != null">city,</if>
@@ -38,6 +41,7 @@
 
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="openid!= null">#{openid,jdbcType=VARCHAR},</if>
             <if test="nickName!= null">#{nickName,jdbcType=VARCHAR},</if>
             <if test="avatarUrl!= null">#{avatarUrl,jdbcType=VARCHAR},</if>
             <if test="city!= null">#{city,jdbcType=VARCHAR},</if>
@@ -48,7 +52,21 @@
 
         </trim>
     </insert>
+    <update id="update" parameterMap="wxinfoPar">
+        update wxinfo set
+        nick_name=#{nickName},
+        avatar_url=#{avatarUrl},
+        city=#{city},
+        country=#{country},
+        gender=#{gender},
+        language=#{language},
+        province=#{province}
+        where openid=#{openid}
+    </update>
 
+    <select id="selectByOpenid" parameterType="string" resultMap="wxInfo">
+        select * from wxinfo where openid = #{openid};
+    </select>
 
 
 </mapper>

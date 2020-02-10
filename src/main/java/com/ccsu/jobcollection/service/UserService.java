@@ -9,4 +9,6 @@ import com.ccsu.jobcollection.pojo.WxInfo;
  */
 public interface UserService {
     void saveWxInfo(WxInfo wxInfo);
+    WxInfo getWxInfoByOpenid(String openid);
+    WxInfo decipher(String encry,String iv, String code);
 }

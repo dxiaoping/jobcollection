@@ -14,4 +14,6 @@ import org.springframework.stereotype.Repository;
 public interface WxInfoMapper {
 
     int insert(WxInfo wxInfo);
+    int update(WxInfo wxInfo);
+    WxInfo selectByOpenid(String openid);
 }
