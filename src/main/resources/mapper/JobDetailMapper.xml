@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccsu.jobcollection.mapper.JobDetailMapper">
+
+    <resultMap id="jobdetail" type="com.ccsu.jobcollection.pojo.JobDetail">
+        <result column="job_info_id" property="jobInfoId"/>
+        <result column="company_detail" property="companyDetail"/>
+        <result column="talk_info" property="talkInfo"/>
+        <result column="talk_detail" property="talkDetail"/>
+    </resultMap>
+
+    <parameterMap id="jobdetailPar" type="com.ccsu.jobcollection.pojo.JobDetail">
+        <parameter property="jobInfoId"/>
+        <parameter property="talkInfo"/>
+        <parameter property="talkDetail"/>
+        <parameter property="companyDetail"/>
+    </parameterMap>
+
+
+    <insert id="insertJobDetail" parameterMap="jobdetailPar">
+
+        insert into job_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jobInfoId != 0">job_info_id,</if>
+            <if test="talkInfo != null">talk_info,</if>
+            <if test="talkDetail != null">talk_detail,</if>
+            <if test="companyDetail != null">company_detail,</if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jobInfoId!= null">#{jobInfoId,jdbcType=INTEGER},</if>
+            <if test="talkInfo!= null">#{talkInfo,jdbcType=VARCHAR},</if>
+            <if test="talkDetail!= null">#{talkDetail,jdbcType=VARCHAR},</if>
+            <if test="companyDetail!= null">#{companyDetail,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <select id="selectByJobInfoId" resultMap="jobdetail">
+        select * from job_detail where `job_info_id`=#{id}
+    </select>
+    <!--<select id="queryJobInfo" resultMap="jobinfo">-->
+        <!--select * from jobinfo limit 1,20-->
+    <!--</select>-->
+
+
+
+</mapper>
